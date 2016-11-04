@@ -1240,25 +1240,10 @@ public class CaptureModule extends CameraModule implements
             // - Surface scales the buffer to fit the current view bounds.
 
             // Get natural orientation and buffer dimensions
-
-            if(USE_AUTOTRANSFORM_UI_LAYOUT) {
-                // Use PhotoUI-based AutoTransformation Interface
-                if (mPreviewBufferWidth != 0 && mPreviewBufferHeight != 0) {
-                    if (requiresNexus4SpecificFixFor16By9Previews()) {
-                        // Force preview size to be 16:9, even though surface is 4:3
-                        // Surface content is assumed to be 16:9.
-                        mAppController.updatePreviewAspectRatio(16.f / 9.f);
-                    } else {
-                        mAppController.updatePreviewAspectRatio(
-                                mPreviewBufferWidth / (float) mPreviewBufferHeight);
-                    }
-                }
-            } else {
-                Matrix transformMatrix = mPreviewTransformCalculator.toTransformMatrix(
+            Matrix transformMatrix = mPreviewTransformCalculator.toTransformMatrix(
                         new Size(mScreenWidth, mScreenHeight),
                         new Size(mPreviewBufferWidth, mPreviewBufferHeight));
-                mAppController.updatePreviewTransform(transformMatrix);
-            }
+            mAppController.updatePreviewTransform(transformMatrix);
         }
     }
 

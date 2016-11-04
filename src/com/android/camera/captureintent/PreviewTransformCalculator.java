@@ -72,7 +72,7 @@ public class PreviewTransformCalculator {
                 previewViewRect, centeredEffectivePreviewRect, Matrix.ScaleToFit.FILL);
 
         // Rotate buffer contents to proper orientation
-        int rotateDegree = mOrientationManager.getDisplayRotation().getDegrees();
+        int rotateDegree = mOrientationManager.getDisplayRotation().getDegrees() % 360 + 180;
         transformMatrix.postRotate(
                 rotateDegree,
                 previewViewCenter.x, previewViewCenter.y);
